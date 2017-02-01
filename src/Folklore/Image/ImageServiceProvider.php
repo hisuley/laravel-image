@@ -32,7 +32,7 @@ class ImageServiceProvider extends ServiceProvider
         ], 'config');
         
         $this->publishes([
-            $publicFile => public_path('vendor/hisuley/image')
+            $publicFile => public_path('vendor/folklore/image')
         ], 'public');
 
         $app = $this->app;
