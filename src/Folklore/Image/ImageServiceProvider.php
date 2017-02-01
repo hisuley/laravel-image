@@ -20,15 +20,15 @@ class ImageServiceProvider extends ServiceProvider
     public function boot()
     {
         // Config file path
-        $configFile = __DIR__ . '/../../resources/config/image.php';
+        $configFile = __DIR__ . '/../../resources/config/fimage.php';
         $publicFile = __DIR__ . '/../../resources/assets/';
 
         // Merge files
-        $this->mergeConfigFrom($configFile, 'image');
+        $this->mergeConfigFrom($configFile, 'fimage');
 
         // Publish
         $this->publishes([
-            $configFile => config_path('image.php')
+            $configFile => config_path('fimage.php')
         ], 'config');
         
         $this->publishes([
@@ -39,30 +39,30 @@ class ImageServiceProvider extends ServiceProvider
         $router = $app['router'];
         $config = $app['config'];
         
-        $pattern = $app['image']->pattern();
+        $pattern = $app['fimage']->pattern();
         $proxyPattern = $config->get('image.proxy_route_pattern');
         $router->pattern('image_pattern', $pattern);
         $router->pattern('image_proxy_pattern', $proxyPattern ? $proxyPattern:$pattern);
 
         //Serve image
-        $serve = config('image.serve');
+        $serve = config('fimage.serve');
         if ($serve) {
             // Create a route that match pattern
-            $serveRoute = $config->get('image.serve_route', '{image_pattern}');
+            $serveRoute = $config->get('fimage.serve_route', '{image_pattern}');
             $router->get($serveRoute, array(
                 'as' => 'image.serve',
-                'domain' => $config->get('image.domain', null),
+                'domain' => $config->get('fimage.domain', null),
                 'uses' => 'Folklore\Image\ImageController@serve'
             ));
         }
         
         //Proxy
-        $proxy = $this->app['config']['image.proxy'];
+        $proxy = $this->app['config']['fimage.proxy'];
         if ($proxy) {
-            $serveRoute = $config->get('image.proxy_route', '{image_proxy_pattern}');
+            $serveRoute = $config->get('fimage.proxy_route', '{image_proxy_pattern}');
             $router->get($serveRoute, array(
                 'as' => 'image.proxy',
-                'domain' => $config->get('image.proxy_domain'),
+                'domain' => $config->get('fimage.proxy_domain'),
                 'uses' => 'Folklore\Image\ImageController@proxy'
             ));
         }
@@ -75,7 +75,7 @@ class ImageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('image', function ($app) {
+        $this->app->singleton('fimage', function ($app) {
             return new ImageManager($app);
         });
     }
@@ -87,6 +87,6 @@ class ImageServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('image');
+        return array('fimage');
     }
 }

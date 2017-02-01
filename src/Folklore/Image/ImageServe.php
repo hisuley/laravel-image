@@ -99,7 +99,7 @@ class ImageServe
     
     protected function getResponseExpires()
     {
-        return config('image.serve_expires', 3600*24*31);
+        return config('fimage.serve_expires', 3600*24*31);
     }
     
     protected function createResponseFromContent($content)

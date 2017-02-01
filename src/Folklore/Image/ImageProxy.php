@@ -28,8 +28,8 @@ class ImageProxy extends ImageServe
     public function response($path)
     {
         // Increase memory limit, cause some images require a lot to resize
-        if (config('image.memory_limit')) {
-            ini_set('memory_limit', config('image.memory_limit'));
+        if (config('fimage.memory_limit')) {
+            ini_set('memory_limit', config('fimage.memory_limit'));
         }
         
         $app = app();
@@ -226,8 +226,8 @@ class ImageProxy extends ImageServe
     
     protected function getResponseExpires()
     {
-        $proxyExpires = config('image.proxy_expires', null);
-        return $proxyExpires ? $proxyExpires:config('image.serve_expires', 3600*24*31);
+        $proxyExpires = config('fimage.proxy_expires', null);
+        return $proxyExpires ? $proxyExpires:config('fimage.serve_expires', 3600*24*31);
     }
     
     protected function saveToProxyCache($path, $contents)
