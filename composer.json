@@ -1,10 +1,15 @@
 {
-    "name": "folklore/image",
+    "name": "hisuley/image",
     "description": "Image manipulation library for Laravel 4 based on Imagine and inspired by Croppa for easy url based manipulation",
     "keywords": ["laravel","image","imagick","gd","imagine","watermark","gmagick","thumbnail"],
-    "homepage": "http://github.com/Folkloreatelier/laravel-image",
+    "homepage": "http://github.com/hisuley/laravel-image",
     "license": "MIT",
     "authors": [
+	 {
+            "name": "Suley Lu",
+            "email": "suley@linkyee.com",
+            "homepage": "https://www.linkyee.com/staff/suley"
+        },
         {
             "name": "Folklore",
             "email": "info@atelierfolklore.ca",
